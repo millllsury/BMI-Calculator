@@ -117,12 +117,19 @@ class MainViewController: UIViewController {
     }
 
     private func circleButton(systemName: String) -> UIButton {
-        let button = UIButton()
-        let config = UIImage.SymbolConfiguration(pointSize: 44, weight: .medium)
+        let symbolConfig = UIImage.SymbolConfiguration(
+            pointSize: 44,
+            weight: .medium
+        )
+//        .applying(UIImage.SymbolConfiguration(
+//            paletteColors: [ .white, secondaryColor]
+//        ))
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(systemName: systemName, withConfiguration: symbolConfig)
+        config.baseForegroundColor = secondaryColor
+        let button = UIButton(configuration: config)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: systemName, withConfiguration: config), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
-        button.tintColor = secondaryColor
         return button
     }
     
@@ -159,7 +166,6 @@ class MainViewController: UIViewController {
         config.title = title
         config.baseForegroundColor = .white   // цвет иконки
         config.titleAlignment = .center
-        config.baseBackgroundColor = .white
         config.background.cornerRadius = 10
         config.imagePlacement = .top
         config.imagePadding = 32
