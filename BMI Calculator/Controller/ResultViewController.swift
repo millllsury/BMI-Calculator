@@ -31,7 +31,6 @@ class ResultViewController: UIViewController {
         stack.alignment = .center
         stack.backgroundColor = .stack
         stack.layer.cornerRadius = 10
-        
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         
@@ -44,13 +43,11 @@ class ResultViewController: UIViewController {
         label.textColor = .green
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
     private lazy var valueLabel: UILabel = {
         let label = UILabel()
-        label.text = "22.3"
         label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -61,11 +58,10 @@ class ResultViewController: UIViewController {
     
     private lazy var descriptionOfResult: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 20, weight: .regular)
+        label.font = .systemFont(ofSize: 20, weight: .light)
         label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.text = "You have a normal body weight. Good job!"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -100,7 +96,7 @@ class ResultViewController: UIViewController {
         ]
         setupHierarchy()
         setupLayout()
-        bindData()
+        getData()
         setupActions()
     }
     
@@ -132,17 +128,15 @@ class ResultViewController: UIViewController {
         ])
     }
     
-    // MARK: Bind Data
-    private func bindData() {
+    // MARK: Get Data
+    private func getData() {
         statusLabel.text = bmi.result().statusName
         statusLabel.textColor = bmi.result().uiColor
         valueLabel.text = String(format: "%.1f", bmi.calculatedBMI)
         descriptionOfResult.text = bmi.result().description
-
     }
     
     // MARK: Actions
-    
     private func setupActions() {
         recalculateButton.addTarget(self, action: #selector(reCalculate), for: .touchUpInside)
     }
@@ -150,14 +144,4 @@ class ResultViewController: UIViewController {
     @objc private func reCalculate() {
         navigationController?.popViewController(animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

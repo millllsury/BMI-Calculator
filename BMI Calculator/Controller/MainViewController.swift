@@ -18,8 +18,8 @@ class MainViewController: UIViewController {
     private lazy var heightMeasure = mainView.heightMeasure
     private lazy var heightSlider = mainView.heightSlider
     
-    private var heightMeasureConverted: String {
-        String(format: "%.f", heightSlider.value)
+    private var heightMeasureConverted: Int {
+        Int(heightSlider.value)
     }
     
     private lazy var plusWeightButton = mainView.plusWeightButton
@@ -42,7 +42,7 @@ class MainViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [
             .foregroundColor: UIColor.white
         ]
-        heightMeasure.text = heightMeasureConverted
+        heightMeasure.text = String(heightMeasureConverted)
         weightValue.text = "50"
         ageValue.text = "25"
         setupActions()
@@ -101,18 +101,18 @@ class MainViewController: UIViewController {
     }
     
     @objc private func useSlider() {
-        heightMeasure.text = heightMeasureConverted
+        heightMeasure.text = String(heightMeasureConverted)
     }
     
     @objc private func toggleGenderButton(sender: UIButton) {
-        maleButton.isSelected = sender == mainView.maleButton
-        femaleButton.isSelected = sender == mainView.femaleButton
+        maleButton.isSelected = (sender == maleButton)
+        femaleButton.isSelected = (sender == femaleButton)
     }
     
     @objc private func calculateButtonTap() {
         let genderIndex = maleButton.isSelected ? 0 : 1
         let gender: Gender = Gender(rawValue: genderIndex)!
-        let height = Int(heightMeasureConverted)!
+        let height = heightMeasureConverted
         let weight = Int(weightValue.text!)!
         let age = Int(ageValue.text!)!
         
@@ -122,10 +122,6 @@ class MainViewController: UIViewController {
         navigationController?.pushViewController(resultVC, animated: true)
 
     }
-    
-    
-    
-    
     
 
 }

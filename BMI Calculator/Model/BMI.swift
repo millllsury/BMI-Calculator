@@ -49,11 +49,11 @@ struct BMI {
     let age: Int
     
     private var calculatedHeight: Double {
-        sqrt((Double(height) / 10))
+        return pow(Double(height) / 100, 2)
     }
     
     var calculatedBMI: Double {
-         Double(weight) / Double(calculatedHeight)
+        return Double(weight) / Double(calculatedHeight)
     }
     
     var characteristics: (Int ,Gender, Double) {
